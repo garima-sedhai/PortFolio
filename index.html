@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garima - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleport.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f2231;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            background-color: #1a364c;
+            padding: 0 50px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: large;
+        }
+
+        nav ul li a:hover {
+            color: #a0d8ef;
+        }
+
+        .left {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #a0d8ef;
+        }
+
+        .firstSection {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 10%;
+            background-color: #112e42;
+        }
+
+        .firstSection div {
+            width: 45%;
+        }
+
+        .leftSection {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .rightSection img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #a06fe0;
+            box-shadow: 0 0 15px rgba(160, 111, 224, 0.4);
+        }
+
+        .purple {
+            color: #a06fe0;
+        }
+
+        #element {
+            color: #a06fe0;
+        }
+
+        .intro-text {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #d1d9e0;
+        }
+
+        .btn-section {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #a06fe0, #8c5fe0);
+            color: #fff;
+            padding: 12px 28px;
+            margin: 8px 10px 0 0;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(160, 111, 224, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(160, 111, 224, 0.4);
+        }
+
+        .skills-section {
+            padding: 50px 10%;
+            background-color: #0e1b26;
+        }
+
+        .skills-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #a0d8ef;
+        }
+
+        .skills-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .skill-box {
+            background-color: #1a364c;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="left">Garima's Portfolio</div>
+            <div class="right">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skill.html">Skills</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="contact1.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="firstSection">
+            <div class="leftSection">
+                Hi, My name is <span class="purple">Garima</span><br>
+                I am <span id="element"></span>
+                <p class="intro-text">I'm a passionate BCA student learning frontend technologies to build beautiful and functional websites. Welcome to my digital space!</p>
+                <div class="btn-section">
+                    <a href="https://github.com/garima-sedhai" class="btn">See My Projects</a>
+                    <a href="contact.html" class="btn">Hire Me</a>
+                    <a href="/Frontenddevelopment.pdf" class="btn" download>Download CV</a>
+                </div>
+            </div>
+            <div class="rightSection">
+                <img src="r.png.jpg" alt="Garima's Photo">
+            </div>
+        </section>
+
+        <section class="skills-section" id="skills">
+            <h2>Skills</h2>
+            <div class="skills-list">
+                <div class="skill-box">HTML</div>
+                <div class="skill-box">CSS</div>
+                <div class="skill-box">JavaScript</div>
+                <div class="skill-box">C Programming</div>
+                <div class="skill-box">Java</div>
+                <div class="skill-box">Git & GitHub</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['a BCA Student.', 'interested in Front-end Development.', 'an Enthusiastic Learner.'],
+            typeSpeed: 50,
+            loop: true
+        });
+    </script>
+</body>
+</html>
