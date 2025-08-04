@@ -1,147 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        *{
-    margin: 0;
-    padding: 0;
-}
-.container{
-    width: 100%;
-    height:100vh;
-    background-color: #263f4a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.weather_con{
-    color: white;
-}
-.temp{
-    font-size: 4.5rem;
-}
-.time_location{
-    font-size: 2rem;
-}
-.container{
-    margin: 0.5px;
-    margin-left: 0.5px;
-    font-size: 18px;
-}
-nav{
-    height:15px;
-}
-.search_area{
-    padding: 5px 0px;
-    outline: none;
-    border: none;
-    color: white;
-    background-color: transparent;
-    font-size: 25px;
-    border-bottom: 2px solid white;
-
-}
-nav form button{
-    background-color: white;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    outline: none;
-    font-size:1.1rem ;
-    border: none;
-    cursor: pointer;
-}
-.search_button{
-    border: 1px solid black;
-    border-radius: 3px;
-    border-style:groove;
-    background-color: gainsboro;
-}
-    </style>>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      height: 100vh;
+      background-color: #263f4a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+    .weather_con {
+      color: white;
+      text-align: center;
+    }
+    .temp {
+      font-size: 4.5rem;
+    }
+    .time_location {
+      font-size: 2rem;
+    }
+    nav {
+      margin-top: 2rem;
+    }
+    .search_area {
+      padding: 5px 0px;
+      outline: none;
+      border: none;
+      color: white;
+      background-color: transparent;
+      font-size: 25px;
+      border-bottom: 2px solid white;
+    }
+    nav form button {
+      background-color: white;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      outline: none;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+    }
+    .search_button {
+      border: 1px solid black;
+      border-radius: 3px;
+      border-style: groove;
+      background-color: gainsboro;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="weather_con">
-             <div class="temp">
-        <p>20</p>
+  <div class="container">
+    <div class="weather_con">
+      <div class="temp">
+        <p>--</p>
+      </div>
+      <div class="time_location">
+        <p>Location</p>
+        <span>--:-- - Day YYYY-MM-DD</span>
+      </div>
+      <div class="condition">
+        <p>--</p>
+      </div>
     </div>
-    <div class="time_location">
-  <p>Kathmandu</p>
-  <span>2:24 - Wednesday 2025-07-23</span>
-    </div>
-    <div class="condition">
-        <p>Mist</p>
-    </div>
+    <nav>
+      <form>
+        <input type="text" placeholder="Search for a Location..." class="search_area" />
+        <button type="submit" class="search_button">Search</button>
+      </form>
+    </nav>
+  </div>
 
-        </div>
-         <nav>
-            <form>
-                <input type="text" placeholder="Search for a Location..." class="search_area">
-                <button type="submit" class="search_button">Search</button>
-            </form>
-         </nav>
-         </div>
-        
-   
-</body>
-<script>
+  <script>
     const temperatureField = document.querySelector(".temp p");
-const locationField = document.querySelector(".time_location p");
-const dataField = document.querySelector(".time_location span");
-const weatherField = document.querySelector(".condition p");
-const searchField = document.querySelector(".search_area");
-const form = document.querySelector("form");
+    const locationField = document.querySelector(".time_location p");
+    const dataField = document.querySelector(".time_location span");
+    const weatherField = document.querySelector(".condition p");
+    const searchField = document.querySelector(".search_area");
+    const form = document.querySelector("form");
 
-form.addEventListener('submit', searchForLocation);
+    form.addEventListener("submit", searchForLocation);
 
-let target = 'Kathmandu';
+    let target = "Kathmandu";
 
-const fetchDetails = async (targetLocation) => {
-  let url = `http://api.weatherapi.com/v1/current.json?key=c95ce99ceded494980891517252307&q=${targetLocation}&aqi=no`;
-  const res = await fetch(url);
-  const data = await res.json();
+    const fetchDetails = async (targetLocation) => {
+      let url = `https://api.weatherapi.com/v1/current.json?key=c95ce99ceded494980891517252307&q=${targetLocation}&aqi=no`;
 
-  let locationName = data.location.name;
-  let time = data.location.localtime;
-  let temp = data.current.temp_c;
-  let condition = data.current.condition.text;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-  updateDetails(temp, locationName, time, condition);
-};
+        let locationName = data.location.name;
+        let time = data.location.localtime;
+        let temp = data.current.temp_c;
+        let condition = data.current.condition.text;
 
-function updateDetails(temp, locationName, time, condition) {
-  let splitDate = time.split(' ')[0];
-  let splitTime = time.split(' ')[1];
-  let currentDay = getDayName(new Date(splitDate).getDay());
+        updateDetails(temp, locationName, time, condition);
+      } catch (error) {
+        alert("Location not found or error fetching data.");
+        console.error(error);
+      }
+    };
 
-  temperatureField.innerText = temp;
-  locationField.innerText = locationName;
-  dataField.innerText = `${splitTime} - ${currentDay} ${splitDate}`;
-  weatherField.innerText = condition;
-}
+    function updateDetails(temp, locationName, time, condition) {
+      let splitDate = time.split(" ")[0];
+      let splitTime = time.split(" ")[1];
+      let currentDay = getDayName(new Date(splitDate).getDay());
 
-function searchForLocation(e) {
-  e.preventDefault();
-  target = searchField.value.trim();
-  fetchDetails(target);
-}
+      temperatureField.innerText = temp + "°C";
+      locationField.innerText = locationName;
+      dataField.innerText = `${splitTime} - ${currentDay} ${splitDate}`;
+      weatherField.innerText = condition;
+    }
 
-function getDayName(number) {
-  switch (number) {
-    case 0: return "Sunday";
-    case 1: return "Monday";
-    case 2: return "Tuesday";
-    case 3: return "Wednesday";
-    case 4: return "Thursday";
-    case 5: return "Friday";
-    case 6: return "Saturday";
-    default: return "Unknown";
-  }
-}
+    function searchForLocation(e) {
+      e.preventDefault();
+      target = searchField.value.trim();
+      if (target) {
+        fetchDetails(target);
+      }
+    }
 
-fetchDetails(target);
+    function getDayName(number) {
+      switch (number) {
+        case 0: return "Sunday";
+        case 1: return "Monday";
+        case 2: return "Tuesday";
+        case 3: return "Wednesday";
+        case 4: return "Thursday";
+        case 5: return "Friday";
+        case 6: return "Saturday";
+        default: return "Unknown";
+      }
+    }
 
-</script>
+    fetchDetails(target);
+  </script>
+</body>
 </html>
